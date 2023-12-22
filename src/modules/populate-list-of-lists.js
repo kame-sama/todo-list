@@ -15,7 +15,6 @@ export default function(id) {
   });
 
   if (id == 'list-create') listOfLists.setFocus(lists.length - 1);
-  console.log(listOfLists.getFocus());
   
   populateListOfTasks();
   populateListOfCompleted();

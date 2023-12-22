@@ -3,6 +3,7 @@ import createForm from './create-task-form';
 import handleForm from './handle-task-form';
 import populateListOfTasks from './populate-list-of-tasks';
 import populateListOfCompleted from './populate-list-of-completed';
+import saveToLocal from './save-to-local';
 
 export default function() {
   const create = document.querySelector('#task-create');
@@ -26,13 +27,13 @@ export default function() {
     if (event.target.dataset.complete) {
       const index = event.target.dataset.complete;
       listOfLists.getFocus().complete(index);
-
+      saveToLocal();
       populateListOfTasks();
       populateListOfCompleted();
     } else if (event.target.dataset.delete) {
       const index = event.target.dataset.complete;
       listOfLists.getFocus().removeTask(index);
-
+      saveToLocal();
       populateListOfTasks();
       populateListOfCompleted();
     } else if (event.target.dataset.index) {
@@ -51,13 +52,13 @@ export default function() {
     if (event.target.dataset.undo) {
       const index = event.target.dataset.undo;
       listOfLists.getFocus().undo(index);
-
+      saveToLocal();
       populateListOfTasks();
       populateListOfCompleted();
     } else if (event.target.dataset.delete) {
       const index = event.target.dataset.complete;
       listOfLists.getFocus().removeCompleted(index);
-
+      saveToLocal();
       populateListOfTasks();
       populateListOfCompleted();
     } else if (event.target.dataset.index) {

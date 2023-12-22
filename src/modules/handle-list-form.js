@@ -1,5 +1,6 @@
 import { listOfLists } from "./list-of-lists";
 import populateListOfLists from "./populate-list-of-lists";
+import saveToLocal from "./save-to-local";
 
 export default function(event) {
   const aside = document.querySelector('aside');
@@ -29,12 +30,11 @@ export default function(event) {
     } else if (id == 'list-rename') {
       listOfLists.getFocus().title = title.value;
     }
-
+    
+    saveToLocal();
     populateListOfLists(id);
 
     form.remove();
-
-    // if (id == 'list-create') aside.scrollTo(0, aside.scrollHeight);
   }
 
   function handleInputChange(event) {

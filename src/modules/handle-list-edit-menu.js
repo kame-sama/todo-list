@@ -2,6 +2,7 @@ import createForm from './create-list-form';
 import handleForm from './handle-list-form';
 import { listOfLists } from './list-of-lists';
 import populateListOfLists from './populate-list-of-lists';
+import saveToLocal from './save-to-local';
 
 export default function() {
   const menu = document.querySelector('.list-edit-menu');
@@ -23,6 +24,7 @@ export default function() {
 
   function handleRemoveClick(event) {
       listOfLists.remove();
+      saveToLocal();
       const id = event.target.id;
       populateListOfLists(id);
       menu.remove();

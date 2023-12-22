@@ -1,5 +1,6 @@
 import { listOfLists } from "./list-of-lists";
 import populateListOfTasks from "./populate-list-of-tasks";
+import saveToLocal from "./save-to-local";
 
 export default function(id, index) {
   const form = document.querySelector('.task-form');
@@ -42,6 +43,7 @@ export default function(id, index) {
       listOfLists.getFocus().read()[index].priority = priority.value;
     }
 
+    saveToLocal();
     populateListOfTasks();
 
     form.remove();
