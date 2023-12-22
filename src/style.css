@@ -1,0 +1,319 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: system-ui, sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+input,
+button,
+textarea,
+select {
+  appearance: none;
+  font: inherit;
+}
+
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+}
+
+button {
+  background-color: white;
+  border: none;
+  color: black;
+  font-size: 1.1rem;
+  text-align: left;
+  padding: 0.5rem 0;
+}
+
+button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+*:disabled {
+  color: lightgray;
+
+  &:hover {
+    text-decoration: none;
+    cursor: not-allowed;
+  }
+}
+
+label {
+  font: inherit;
+}
+
+body {
+  height: 100vh;
+  display: grid;
+  grid-template: 95px 1fr / 300px 1fr;
+  grid-template-areas:
+    'header header'
+    'aside main';
+}
+
+header,
+aside,
+main {
+  padding: 1rem;
+}
+
+header {
+  grid-area: header;
+  border-bottom: 1px solid black;
+}
+
+h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+aside {
+  grid-area: aside;
+  border-right: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
+  overflow-x: auto;
+}
+
+aside::-webkit-scrollbar,
+main .task-form::-webkit-scrollbar,
+main::-webkit-scrollbar {
+  width: 5px;
+}
+
+aside::-webkit-scrollbar-thumb,
+main .task-form::-webkit-scrollbar-thumb,
+main::-webkit-scrollbar-thumb {
+  background-color: black;
+  border: 1px solid white;
+}
+
+aside > button {
+  position: sticky;
+  top: -1rem;
+}
+
+aside .list-of-lists {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+aside .list-of-lists button,
+aside .list-edit-menu button {
+  display: block;
+  width: 100%;
+}
+
+aside .list-form,
+aside .list-edit-menu,
+main .task-form {
+  padding: 1rem;
+  position: fixed;
+  top: 95px;
+  left: 0;
+  width: 300px;
+  height: calc(100% - 95px);
+  background-color: white;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: space-between;
+  border-right: 1px solid black;
+}
+
+aside .list-form input {
+  width: 100%;
+  font-size: 1.4rem;
+  padding: 1rem;
+  border: none;
+}
+
+aside .list-edit-menu {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+aside .list-edit-menu button:nth-child(2) {
+  border-right: 4px solid blue;
+
+  &:hover {
+    cursor: default;
+    text-decoration: none;
+  }
+}
+
+aside .list-edit-menu > :not(button:nth-child(2)) {
+  text-align: right;
+}
+
+.selected {
+  border-right: 4px solid blue;
+}
+
+main {
+  grid-area: main;
+  overflow-x: auto;
+}
+
+main > button {
+  margin-bottom: 2rem;
+}
+
+main .list-of-tasks,
+main .list-of-completed {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+main .list-of-tasks {
+  margin-bottom: 1rem;
+}
+
+main .task-form {
+  overflow-x: auto;
+  h2 {
+    flex: 0 0 100%;
+  }
+}
+
+main .task-form input,
+main .task-form select,
+main .task-form textarea {
+  border: 1px solid gainsboro;
+  font-size: 1.1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+main .task-form textarea {
+  height: 9rem;
+  font-size: 1rem;
+  resize: none;
+}
+
+main .task-form label {
+  font-size: 1.1rem;
+}
+
+main p {
+  font-weight: 100;
+  font-size: 1rem;
+}
+
+main .list-of-completed h3 {
+  text-decoration: line-through;
+}
+
+main .list-of-tasks li,
+main .list-of-completed li {
+  display: grid;
+  grid-template: auto auto / calc(2rem + 4px) 400px 120px;
+  grid-template-areas:
+    'check heading     date'
+    'check description delete';
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid gainsboro;
+  width: max-content;
+
+
+&[data-priority="0"] {
+  border-left: 1rem solid;
+  border-color: gainsboro;
+}
+
+&[data-priority="1"] {
+  border-left: 1rem solid;
+  border-color: lightgreen;
+}
+
+&[data-priority="2"] {
+  border-left: 1rem solid;
+  border-color: sandybrown;
+}
+
+&[data-priority="3"] {
+  border-left: 1rem solid;
+  border-color: orangered;
+}
+}
+
+main .list-of-tasks li button.task-complete,
+main .list-of-completed li button.task-undo {
+  grid-area: check;
+  padding: 0.5rem;
+  margin-right: 1rem;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid transparent;
+  outline: 2px solid black;
+  align-self: center;
+}
+
+main .list-of-completed li button.task-undo {
+  background-color: blue;
+  border: 2px solid white;
+  outline: 2px solid blue;
+}
+
+main .list-of-tasks li h3,
+main .list-of-completed li h3 {
+  grid-area: heading;
+  font-size: 1.25rem;
+  pointer-events: none;
+}
+
+main .list-of-tasks li p:first-of-type,
+main .list-of-completed li p:first-of-type {
+  grid-area: description;
+  pointer-events: none;
+}
+
+main .list-of-tasks li p:last-of-type,
+main .list-of-completed li p:last-of-type {
+  grid-area: date;
+  justify-self: self-end;
+  pointer-events: none;
+}
+
+main button.task-delete {
+  grid-area: delete;
+  padding: 0;
+  font-size: 0.875rem;
+  color: gainsboro;
+  justify-self: self-end;
+}
+
+main button.task-delete:hover {
+  color: black;
+}
