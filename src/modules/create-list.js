@@ -1,52 +1,37 @@
-export default function(title) {
-  const _tasks = [];
-  const _completed = [];
+import createTask from './create-task';
 
-  const add = (title, description, date, priority) => {
-    const task = createTask(title, description, date, priority);
-    _tasks.push(task);
+export default function createList(title) {
+  const tasks = [];
+  const completed = [];
+
+  const add = (taskTitle, description, date, priority) => {
+    tasks.push(createTask(taskTitle, description, date, priority));
   };
 
   const complete = (index) => {
-    _completed.push(..._tasks.splice(index, 1));
+    completed.push(...tasks.splice(index, 1));
   };
 
-  const undo = (index) => {
-    _tasks.push(..._completed.splice(index, 1));
+  const redo = (index) => {
+    tasks.push(...completed.splice(index, 1));
   };
 
-  const removeTask = (index) => {
-    _tasks.splice(index, 1);
+  const remove = (index) => {
+    tasks.splice(index, 1);
   };
 
   const removeCompleted = (index) => {
-    _completed.splice(index, 1);
-  }
-
-  const read = () => {
-    return _tasks;
+    completed.splice(index, 1);
   };
-
-  const readCompleted = () => {
-    return _completed;
-  };
-
-  const edit = (newTitle) => {
-    title = newTitle;
-    console.log(title);
-  }
 
   return {
     title,
+    tasks,
+    completed,
     add,
     complete,
-    removeTask,
+    redo,
+    remove,
     removeCompleted,
-    read,
-    readCompleted,
-    edit,
-    undo
   };
 }
-
-import createTask from './create-task';

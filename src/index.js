@@ -1,10 +1,12 @@
 import init from './modules/init';
-import handleAside from './modules/handle-aside';
-import handleMain from './modules/handle-main';
-import retrieveFromLocal from './modules/retrieve-from-local';
 import './style.css';
+import updateListsDisplay from './modules/updateListsDisplay';
+import controller from './modules/controller';
+import retrieveFromLocal from './modules/retrieve-from-local';
+import updateTasksDisplay from './modules/updateTasksDisplay';
 
-retrieveFromLocal();
 init();
-handleAside();
-handleMain();
+retrieveFromLocal();
+updateListsDisplay();
+updateTasksDisplay();
+controller();

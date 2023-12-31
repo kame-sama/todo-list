@@ -1,14 +1,28 @@
-import { listOfLists } from "./list-of-lists";
+import listOfLists from './list-of-lists';
 
-export default function() {
+export default function saveToLocal() {
   const storage = [];
-  listOfLists.read().forEach((list, index) => {
-    storage.push({title: list.title, tasks: [], completed: []});
-    list.read().forEach(task => {
-      storage[index].tasks.push({title: task.title, description: task.description, date: task.date, priority: task.priority});
+  listOfLists.lists.forEach((list, index) => {
+    storage.push({
+      title: list.title,
+      tasks: [],
+      completed: [],
     });
-    list.readCompleted().forEach(task => {
-      storage[index].completed.push({title: task.title, description: task.description, date: task.date, priority: task.priority});
+    list.tasks.forEach((task) => {
+      storage[index].tasks.push({
+        title: task.title,
+        description: task.description,
+        date: task.date,
+        priority: task.priority,
+      });
+    });
+    list.completed.forEach((task) => {
+      storage[index].completed.push({
+        title: task.title,
+        description: task.description,
+        date: task.date,
+        priority: task.priority,
+      });
     });
   });
 
