@@ -9,12 +9,14 @@ export default function controller() {
   const lists = document.querySelector('.lists');
   const listPopUp = document.querySelector('.list-pop-up');
   const listPopUpClose = document.querySelector('.list-pop-up .icon');
+  const listPopUpHeading = document.querySelector('.list-pop-up h2');
   const editList = document.querySelector('.list-edit');
   const editListClose = document.querySelector('.list-edit .icon');
 
   const newTaskButton = document.querySelector('.new-task-button');
   const taskPopUp = document.querySelector('.task-pop-up');
   const taskPopUpClose = document.querySelector('.task-pop-up .icon');
+  const taskPopUpHeading = document.querySelector('.task-pop-up h2');
 
   const newListTitle = document.querySelector('#list-title');
   const newListSubmit = document.querySelector('#list-submit');
@@ -44,6 +46,7 @@ export default function controller() {
     newListTitle.select();
     newListSubmit.setAttribute('disabled', '');
     isEdit = false;
+    listPopUpHeading.textContent = 'Create list';
   });
 
   newListTitle.addEventListener('input', () => {
@@ -96,6 +99,7 @@ export default function controller() {
 
   renameList.addEventListener('click', () => {
     isEdit = true;
+    listPopUpHeading.textContent = 'Rename list';
     editList.classList.toggle('active');
     listPopUp.classList.toggle('active');
     newListTitle.value = listOfLists.lists[listOfLists.index].title;
@@ -130,6 +134,7 @@ export default function controller() {
     newTaskDescription.removeAttribute('disabled', '');
     newTaskDate.removeAttribute('disabled', '');
     newTaskPriority.removeAttribute('disabled', '');
+    taskPopUpHeading.textContent = 'Create task';
   });
 
   newTaskTitle.addEventListener('input', () => {
@@ -185,6 +190,7 @@ export default function controller() {
     }
     if (e.target.dataset.index) {
       isEdit = true;
+      taskPopUpHeading.textContent = 'Edit task';
       taskListType = 'tasks';
       const active = document.querySelector('.active');
       if (active) active.classList.toggle('active');
@@ -231,6 +237,7 @@ export default function controller() {
     }
     if (e.target.dataset.index) {
       isEdit = true;
+      taskPopUpHeading.textContent = 'Edit task';
       taskListType = 'completed';
       const active = document.querySelector('.active');
       if (active) active.classList.toggle('active');
